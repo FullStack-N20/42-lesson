@@ -9,4 +9,4 @@ router.get('/:id', tournamentController.getTournamentById);
 router.put('/:id', tournamentController.updateTournament);
 router.delete('/:id', tournamentController.deleteTournament);
 
-export default router; 
+export default router;

@@ -1,8 +1,10 @@
+import { v4 } from 'uuid';
 import mongoose from 'mongoose';
 
 const tournamentSchema = new mongoose.Schema({
     tournament_id: {
-        type: Number,
+        type: String,
+        default: () => v4(),
         required: true,
         unique: true,
         autoIncrement: true

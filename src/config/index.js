@@ -1,2 +1,2 @@
-export * as logger from './winston.js';
-export * as db from './db.js';
+export { db } from './db.js';
+export { logger } from './winston.js';

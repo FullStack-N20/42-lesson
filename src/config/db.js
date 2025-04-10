@@ -1,13 +1,23 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import mongoose from 'mongoose';
+import { logger } from './index.js';
+import dotenv from 'dotenv';
 
-dotenv.config(); 
+dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("MongoDB connected successfully"))
-.catch((error) => console.error("MongoDB connection error:", error));
-
-export default mongoose;
+export const db = {
+    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/Football',
+    options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    },
+    
+    async connect() {
+        try {
+            await mongoose.connect(this.uri, this.options);
+            logger.info('Connected to MongoDB successfully');
+        } catch (error) {
+            logger.error('MongoDB connection error:', error);
+            process.exit(1);
+        }
+    }
+};
